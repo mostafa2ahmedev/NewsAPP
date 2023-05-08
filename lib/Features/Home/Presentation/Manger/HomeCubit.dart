@@ -13,6 +13,8 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit getobject(context) => BlocProvider.of(context);
 
   bool isDark = false;
+  var enumMode = NewsType.allNews;
+  String eunmSort = SortByEnum.publishedAt.name;
 
   void changeThemeState({@required bool? fromShared}) async {
     if (fromShared != null) {
@@ -25,10 +27,20 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  var enumMode = NewsType.allNews;
+  void changeToTrendingEnumMode() {
+    if (enumMode == NewsType.allNews) return;
 
-  String eunmSort = SortByEnum.publishedAt.name;
-  void changeEnumMode() {
+    enumMode = NewsType.allNews;
+    getData(page: currentIndex + 1, sortby: eunmSort);
+    emit(HomeChangeEmumMode());
+  }
+
+  void changeToAllNewsEnumMode() {
+    if (enumMode == NewsType.topTrending) {
+      return;
+    }
+    enumMode = NewsType.topTrending;
+    getTopHeadline();
     emit(HomeChangeEmumMode());
   }
 

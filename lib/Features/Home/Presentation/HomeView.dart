@@ -49,13 +49,7 @@ class HomeView extends StatelessWidget {
                     children: [
                       TabsView(
                           ontap: () {
-                            if (cubit.enumMode == NewsType.allNews) return;
-
-                            cubit.enumMode = NewsType.allNews;
-                            cubit.getData(
-                                page: cubit.currentIndex + 1,
-                                sortby: cubit.eunmSort);
-                            cubit.changeEnumMode();
+                            cubit.changeToTrendingEnumMode();
                           },
                           text: 'All News',
                           fontsize:
@@ -66,12 +60,7 @@ class HomeView extends StatelessWidget {
                       const SizedBox(width: 20),
                       TabsView(
                           ontap: () {
-                            if (cubit.enumMode == NewsType.topTrending) {
-                              return;
-                            }
-                            cubit.enumMode = NewsType.topTrending;
-                            cubit.getTopHeadline();
-                            cubit.changeEnumMode();
+                            cubit.changeToAllNewsEnumMode();
                           },
                           text: 'All Trending',
                           fontsize:
@@ -168,7 +157,9 @@ class HomeView extends StatelessWidget {
                                   ],
                                   onChanged: (String? value) {
                                     cubit.eunmSort = value!;
-                                    cubit.changeEnumMode();
+                                    cubit.getData(
+                                        page: cubit.currentIndex + 1,
+                                        sortby: cubit.eunmSort);
                                   }),
                             ),
                           ),

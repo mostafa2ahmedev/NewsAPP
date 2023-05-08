@@ -8,3 +8,5 @@ enum SortByEnum {
   popularity,
   publishedAt,
 }
+
+enum ChangeDefaultColor { allNews, topNews, notNews }
