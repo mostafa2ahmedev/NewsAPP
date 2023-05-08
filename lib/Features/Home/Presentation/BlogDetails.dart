@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:newsapp/Core/GlobalMethods.dart';
 import 'package:newsapp/Features/Home/Data/NewsModel.dart';
 import 'package:newsapp/Features/Home/Presentation/Manger/HomeCubit.dart';
 import 'package:share_plus/share_plus.dart';
@@ -115,7 +116,10 @@ class NewsDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          GlobalMethods.alertDialog(
+                              errMessage: 'dfs', context: context);
+                        },
                         child: Card(
                           elevation: 10,
                           shape: const CircleBorder(),

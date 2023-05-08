@@ -6,4 +6,8 @@ class Utils {
   Utils(this.context);
 
   Size get getScreenSize => MediaQuery.of(context).size;
+
+  static Size gets(context) {
+    return MediaQuery.of(context).size;
+  }
 }

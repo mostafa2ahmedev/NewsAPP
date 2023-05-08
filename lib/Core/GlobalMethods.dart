@@ -5,15 +5,17 @@ import 'package:newsapp/Core/utils/widgets/VerticalSpacing.dart';
 
 class GlobalMethods {
   static String formattedDate(String publishedAt) {
-    var parsedDate = DateTime.parse(publishedAt);
+    var d = DateTime.now();
+    DateTime parsedDate = DateTime.parse(publishedAt);
     var formatteDate = DateFormat('yyyy-mm-dd hh:mm:ss').format(parsedDate);
     var publishedDate = DateFormat('yyyy-mm-dd hh:mm:ss').parse(formatteDate);
     return '${publishedDate.day}/${publishedDate.month}/${publishedDate.year} On ${publishedDate.hour}:${publishedDate.minute}:${publishedDate.second}';
   }
 
-  Future<void> alertDialog(
+  static Future<void> alertDialog(
       {required String errMessage, required BuildContext context}) async {
     await showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(

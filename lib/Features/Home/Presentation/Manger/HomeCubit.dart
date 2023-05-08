@@ -71,7 +71,7 @@ class HomeCubit extends Cubit<HomeStates> {
       Response response = await DioHelper.getData(
         endPoint: 'everything',
         query: {
-          'q': 'Animals',
+          'q': 'games',
           'pageSize': '5',
           'page': page.toString(),
           'sortBy': sortby
