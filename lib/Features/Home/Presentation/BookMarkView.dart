@@ -21,7 +21,7 @@ class BookMarkView extends StatelessWidget {
           ),
         ),
         body: const EmptyNewsView(
-            text: 'You didn\t add anything yet to your bookmark',
+            text: 'You didn\'t add anything yet to your bookmark',
             imageUrl: 'assets/images/bookmark.png')
         // body: ListView.builder(
         //     itemCount: 20,

@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newsapp/Core/utils/utils.dart';
 import 'package:newsapp/Features/Home/Presentation/Manger/HomeCubit.dart';
@@ -12,11 +11,10 @@ import 'package:newsapp/Features/Home/Presentation/Widgets/EmptyNewsView.dart';
 import 'package:newsapp/Features/Home/Presentation/Widgets/LoadingWidget.dart';
 import 'package:newsapp/Features/Home/Presentation/Widgets/PaginationButton.dart';
 import 'package:newsapp/Features/Home/Presentation/Widgets/TabsView.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:newsapp/Features/Home/Presentation/Manger/Enum.dart';
 
 import '../../../Core/utils/widgets/VerticalSpacing.dart';
-import 'SearchView.dart';
+
 import 'Widgets/Drawer.dart';
 import 'Widgets/TopTrending.dart';
 
@@ -33,20 +31,6 @@ class HomeView extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               elevation: 0,
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            child: const SearchView(),
-                            inheritTheme: true,
-                            ctx: context),
-                      );
-                    },
-                    icon: const Icon(IconlyLight.search))
-              ],
               title: Text(
                 'News app',
                 style: GoogleFonts.lobster(
@@ -69,9 +53,7 @@ class HomeView extends StatelessWidget {
 
                             cubit.enumMode = NewsType.allNews;
                             cubit.getData(
-                                page: cubit.currentIndex == 0
-                                    ? cubit.currentIndex + 1
-                                    : cubit.currentIndex,
+                                page: cubit.currentIndex + 1,
                                 sortby: cubit.eunmSort);
                             cubit.changeEnumMode();
                           },
@@ -200,15 +182,15 @@ class HomeView extends StatelessWidget {
                                 imageUrl: 'assets/images/no_news.png'),
                           )
                         : ConditionalBuilder(
-                            condition: cubit.articles != null,
+                            condition: cubit.articlees != null,
                             fallback: (context) => const LoadingWidget(),
                             builder: (context) {
                               return Expanded(
                                 child: ListView.builder(
-                                  itemCount: cubit.articles!.length,
+                                  itemCount: cubit.articlees!.length,
                                   itemBuilder: (ctx, index) {
                                     return Articles(
-                                      articlesModel: cubit.articles![index],
+                                      articlesModel: cubit.articlees![index],
                                     );
                                   },
                                 ),

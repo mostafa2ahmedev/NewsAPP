@@ -52,7 +52,7 @@ class HomeCubit extends Cubit<HomeStates> {
   ];
 
   NewsModel? newsModel;
-  List<ArticlesModel>? articles;
+  List<ArticlesModel>? articlees;
   void getData({int page = 1, String sortby = 'publishedAt'}) async {
     emit(HomeDataLoading());
     try {
@@ -65,9 +65,10 @@ class HomeCubit extends Cubit<HomeStates> {
           'sortBy': sortby
         },
       );
-      NewsModel.fromjson(response.data);
+      newsModel = NewsModel.fromjson(response.data);
+      print(response);
+      articlees = newsModel!.articles;
 
-      articles = response.data!.articles;
       emit(HomeDataSuccessfully());
     } catch (e) {
       print(e.toString());
@@ -95,37 +96,9 @@ class HomeCubit extends Cubit<HomeStates> {
           'country': 'us',
         },
       );
-      NewsModel.fromjson(response.data);
+      newsModel = NewsModel.fromjson(response.data);
 
-      topHeadline = response.data!.articles;
-      emit(HomeDataSuccessfully());
-    } catch (e) {
-      print(e.toString());
-
-      if (e is DioError) {
-        if (e.response != null && e.response?.statusCode != null) {
-          emit(HomeDataFailer(
-              'Error ${e.response?.statusCode}: ${e.response?.statusMessage}'));
-        } else {
-          emit(HomeDataFailer(' Oops! there is an error '));
-        }
-      } else {
-        emit(HomeDataFailer(e.toString()));
-      }
-    }
-  }
-
-  List<ArticlesModel>? searchList;
-  void getSearchData({required String search}) async {
-    emit(HomeDataLoading());
-    try {
-      Response response = await DioHelper.getData(
-        endPoint: 'everything',
-        query: {'a': search},
-      );
-      NewsModel.fromjson(response.data);
-
-      searchList = response.data!.articles;
+      topHeadline = newsModel!.articles;
       emit(HomeDataSuccessfully());
     } catch (e) {
       print(e.toString());
